@@ -48,6 +48,7 @@ class Auth extends CI_Controller
                         'role_id' => $user['role_id']
                     ];
                     $this->session->set_userdata($data);
+                    redirect('user');
                 } else {
                     $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
                 Terjadi Kesalah pada Username atau Password cuy..
@@ -107,5 +108,13 @@ class Auth extends CI_Controller
           </div>');
             redirect('auth');
         }
+    }
+    public function logout()
+    {
+        $this->session->unset_userdata('email');
+        $this->session->unset_userdata('role_id');
+
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Berhasil Logout.!</div>');
+        redirect('auth');
     }
 }
