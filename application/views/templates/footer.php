@@ -2,7 +2,7 @@
  <footer class="sticky-footer bg-white">
      <div class="container my-auto">
          <div class="copyright text-center my-auto">
-             <span>Copyright &copy; Tugas UAS Cuy <?= date('Y'); ?></span>
+             <span>Copyright &copy; Tugas UAS Cuy <?php echo date('Y'); ?></span>
          </div>
      </div>
  </footer>
@@ -47,6 +47,43 @@
 
  <!-- Custom scripts for all pages-->
  <script src="<?php echo base_url('assets/'); ?>js/sb-admin-2.min.js"></script>
+
+
+ <script>
+     $(document).ready(function() {
+         $('#tggllahir').datepicker({
+             format: 'yyyy-mm-dd',
+             autoclose: true,
+             todayHighlight: true,
+             enDate: '0d',
+         });
+     });
+ </script>
+
+ <script>
+     //  $('.custom-file-input').on('change', function() {
+     //      let fileName = $(this).val().split('\\').pop();
+     //      $(this).next('.custom-file-label').addClass("selected").html(fileName);
+     //  });
+
+     $('.form-check-input').on('click', function() {
+         const menuId = $(this).data('menu');
+         const roleId = $(this).data('role');
+
+         $.ajax({
+             url: "<?php echo base_url('admin/changeaccess'); ?>",
+             type: "post",
+             data: {
+                 roleId: roleId,
+                 menuId: menuId
+             },
+             success: function() {
+                 document.location.href = "<?php echo base_url('admin/roleaccess/'); ?>" + roleId;
+             }
+         });
+     });
+ </script>
+
 
  </body>
 
